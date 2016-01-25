@@ -1,7 +1,7 @@
 # js-restructure
 JavaScript clone of https://github.com/alexflint/go-restructure
 
-This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields. 
+This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields.
 
 Here is a very simple email address parser:
 
@@ -49,7 +49,30 @@ Usage in script tag:
     
     var matcher = window.jsRestructure(...);
 
+## API
 
+The basic fundamental unit of js-restructure is a parser. A parser is created by passing an object to the matcher function (the one you `require`, in the browser this is `window.jsRestructure`).
+
+Creating a parser:
+
+    matcher(T object) -> Parser
+
+For example:
+
+    var parser = matcher({x : A });
+
+**Note:** The parser ignores properties that start with `_`, if you have properties that you do not want to capture but need to specify parts of the RE, start them with `_`. 
+
+A parser is itself a function that can be passed a string, it returns an object of the type passed when creating the parser or null if the parsing failed:
+
+    Parser:: (string) => T?
+
+For example:
+
+    var parser = matcher({x : A });
+    parser("A").x; // A
+    parser("B"); // null, no match
+    
 ## Todo
 
  - <s>put in module</s>
