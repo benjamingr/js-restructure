@@ -1,5 +1,6 @@
 # js-restructure
-JavaScript clone of https://github.com/alexflint/go-restructure
+
+Based on https://github.com/alexflint/go-restructure
 
 This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields.
 
@@ -8,7 +9,7 @@ Here is a very simple email address parser:
 ```js
 var parser = matcher({
    _    : "^",
-   user : "\\w+",
+   user : "\\w+", // can also pass a JS RegExp here
    _2   : "@",
    host : "[^@]+",
    _3    : "$"
@@ -23,7 +24,7 @@ Example primitive URL parser:
 ```js
 var m = matcher({
    protocol    : "http|https",
-   _1 : "://",
+   _1 : "://", // can also pass a RegExp here
    host : "[^/]+",
    _2   : "/",
    path : ".+",
@@ -65,7 +66,7 @@ For example:
 
 A parser is itself a function that can be passed a string, it returns an object of the type passed when creating the parser or null if the parsing failed:
 
-    Parser:: (string) => T?
+    Parser:: (string[, flags]) => T?
 
 For example:
 
@@ -73,6 +74,7 @@ For example:
     parser("A").x; // A
     parser("B"); // null, no match
 
+The second flags parameter is optional and allows setting RE flags like "i" for case insensitivity. 
 The parser also exposes a `.re` property so the resulting RegExp can be checked and reused.
 
 ## Todo

@@ -1,10 +1,12 @@
-module.exports = function matcher(obj) {
+module.exports = function matcher(obj, flags) {
   "use strict";
   var props = Object.getOwnPropertyNames(obj);
   var re = new RegExp(props.reduce(function(p, c) {
-    if(c.indexOf("_") === 0) return p + obj[c];
-    else return p + "(" + obj[c] + ")";
-  }, ""));
+    var val = obj[c];
+    if(val.source) val = val.source; // accept RE arguments
+    if(c.indexOf("_") === 0) return p + val;
+    else return p + "(" + val + ")";
+  }, ""), flags || "");
   props = props.filter(function(x) { return !x.startsWith("_"); });
   var parser = function(pattern) {
       var o = {};
