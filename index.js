@@ -6,7 +6,7 @@ module.exports = function matcher(obj) {
     else return p + "(" + obj[c] + ")";
   }, ""));
   props = props.filter(function(x) { return !x.startsWith("_"); });
-  return function(pattern) {
+  var parser = function(pattern) {
       var o = {};
       var res = re.exec(pattern);
       if(res === null) return null;
@@ -15,4 +15,6 @@ module.exports = function matcher(obj) {
       }
       return o;
   };
+  parser.re = re; // expose regexp
+  return parser;
 };
