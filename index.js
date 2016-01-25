@@ -7,7 +7,7 @@ module.exports = function matcher(obj, flags) {
     if(c[0] === "_") return p + val;
     else return p + "(" + val + ")";
   }, ""), flags || "");
-  props = props.filter(function(x) { return !x.startsWith("_"); });
+  props = props.filter(function(x) { return x[0] !== "_"; });
   var parser = function(pattern) {
       var o = {};
       var res = re.exec(pattern);
