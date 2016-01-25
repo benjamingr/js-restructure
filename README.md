@@ -5,6 +5,14 @@ JavaScript clone of https://github.com/alexflint/go-restructure
 
     npm install js-restructure
 
+Or in the browser
+
+    <script src='https://wzrd.in/standalone/js-restructure@latest'></script>
+
+Usage in script tag:
+    
+    var matcher = window.jsRestructure(...);
+
 ## Match regular expressions into object fields
 
 Example email matcher
