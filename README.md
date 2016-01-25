@@ -28,8 +28,12 @@ matcher({
 
 ## Todo
 
- - put in module
- - npm package
- - cdn etc.
- - tests
+ - ---put in module---
+ - ---npm package---
+ - ---cdn etc.---
+ - ---tests---
  - demos
+ - nested match
+ - measure performance
+ - sugar
+ 
