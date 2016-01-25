@@ -1,0 +1,20 @@
+{
+  "name": "js-restructure",
+  "version": "1.0.0",
+  "description": "This package provides a nifty way to match against regular expressions\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bconstruct and match against regular expressions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://www.github.com/benjamingr/js-restructure"
+  },
+  "keywords": [
+    "regexp",
+    "re",
+    "match"
+  ],
+  "author": "Benjamin Gruenbaum",
+  "license": "MIT"
+}
