@@ -4,7 +4,7 @@
   "description": "This package provides a nifty way to match against regular expressions\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bconstruct and match against regular expressions.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha tests"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
     "match"
   ],
   "author": "Benjamin Gruenbaum",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
 }
