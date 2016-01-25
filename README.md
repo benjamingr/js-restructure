@@ -1,9 +1,9 @@
 # js-restructure
 JavaScript clone of https://github.com/alexflint/go-restructure
 
-This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields. Here is a very simple email address parser:
+This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields. 
 
-Example email matcher:
+Here is a very simple email address parser:
 
 ```js
 var parser = matcher({

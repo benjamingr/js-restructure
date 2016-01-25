@@ -47,26 +47,27 @@ describe("Matching", function() {
 
     assert.equal(m.path, "search?foo=bar");
   });
- //  it("parses 'primitive' CSV", function(){
- //    var m = matcher({
-	//    first   : "\\w+?",
-	//    _1      : ",",
-	//    last    : "\\w+?",
-	//    _2      : "/",
-	//    age     : "\\d+?",
-	//    _3      : "$"
-	// })("Benjamin,Gruenbaum,27")
- //    assert.equal(m.first, "Benjamin");
- //    assert.equal(m.last, "Gruenbaum");
- //    assert.equal(m.age, "27");
- //  });
-  // it("parses HTML", function(){
-  // 	var he = matcher({
-  // 		_1  : "<a href='",
-  // 		url : ".+?",
-  // 		_2  : "'",
-  // 	});
-  // 	var comes = matcher("<a href='http://www.google.com'>Google!</a>");
-  // 	assert.equal(comes.url, "http://www.google.com");
-  // });
+  it("parses 'primitive' CSV", function(){
+    var p = matcher({
+	   first   : "\\w+?",
+	   _1      : ",",
+	   last    : "\\w+?",
+	   _2      : ",",
+	   age     : "\\d+?",
+	   _3      : "$"
+	});
+	var m = p("Benjamin,Gruenbaum,27")
+    assert.equal(m.first, "Benjamin");
+    assert.equal(m.last, "Gruenbaum");
+    assert.equal(m.age, "27");
+  });
+  it("parses HTML", function(){
+  	var he = matcher({
+  		_1  : "<a href='",
+  		url : ".+?",
+  		_2  : "'.*",
+  	});
+  	var comes = he("<a href='http://www.google.com'>Google!</a>");
+  	assert.equal(comes.url, "http://www.google.com");
+  });
 });
