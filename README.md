@@ -16,7 +16,7 @@ var parser = matcher({
 });
 var parts = parser("benji@somewhere.com");
 console.log(parts.user); // benji
-console.log(host); // somewhere.com
+console.log(parts.host); // somewhere.com
 ```
 
 Example primitive URL parser:
