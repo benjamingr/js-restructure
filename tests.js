@@ -33,4 +33,40 @@ describe("Matching", function() {
     assert.equal(m.user, "benji");
     assert.equal(m.host, "nono.com");
   });
+  it("matches primitive http/s urls", function(){
+    var m = matcher({
+	   protocol    : "http|https",
+	   _1 : "://",
+	   host : "[^/]+",
+	   _2   : "/",
+	   path : ".+",
+	   _3    : "$"
+	})("http://www.google.com/search?foo=bar")
+    assert.equal(m.protocol, "http");
+    assert.equal(m.host, "www.google.com");
+
+    assert.equal(m.path, "search?foo=bar");
+  });
+ //  it("parses 'primitive' CSV", function(){
+ //    var m = matcher({
+	//    first   : "\\w+?",
+	//    _1      : ",",
+	//    last    : "\\w+?",
+	//    _2      : "/",
+	//    age     : "\\d+?",
+	//    _3      : "$"
+	// })("Benjamin,Gruenbaum,27")
+ //    assert.equal(m.first, "Benjamin");
+ //    assert.equal(m.last, "Gruenbaum");
+ //    assert.equal(m.age, "27");
+ //  });
+  // it("parses HTML", function(){
+  // 	var he = matcher({
+  // 		_1  : "<a href='",
+  // 		url : ".+?",
+  // 		_2  : "'",
+  // 	});
+  // 	var comes = matcher("<a href='http://www.google.com'>Google!</a>");
+  // 	assert.equal(comes.url, "http://www.google.com");
+  // });
 });

@@ -3,7 +3,8 @@ JavaScript clone of https://github.com/alexflint/go-restructure
 
 This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields. Here is a very simple email address parser:
 
-Example email matcher
+Example email matcher:
+
 ```js
 var parser = matcher({
    _    : "^",
@@ -16,6 +17,25 @@ var parts = parser("benji@somewhere.com");
 console.log(parts.user); // benji
 console.log(host); // somewhere.com
 ```
+
+Example primitive URL parser:
+
+```js
+var m = matcher({
+   protocol    : "http|https",
+   _1 : "://",
+   host : "[^/]+",
+   _2   : "/",
+   path : ".+",
+   _3    : "$"
+})("http://www.google.com/search?foo=bar");
+m.protocol; // http
+m.host; // www.google.com
+m.path; // search?foo=bar
+```
+
+Note: In "real code" use the built in parsing capabilities of browsers/node to parse real URLs. 
+
 
 ## Installation
 
