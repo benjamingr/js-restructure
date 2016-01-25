@@ -28,12 +28,12 @@ matcher({
 
 ## Todo
 
- - ---put in module---
- - ---npm package---
- - ---cdn etc.---
- - ---tests---
+ - <s>put in module</s>
+ - <s>npm package</s>
+ - <s>cdn etc.</s>
+ - <s>tests</s>
  - demos
  - nested match
  - measure performance
  - sugar
- 
+
