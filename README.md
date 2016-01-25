@@ -72,7 +72,9 @@ For example:
     var parser = matcher({x : A });
     parser("A").x; // A
     parser("B"); // null, no match
-    
+
+The parser also exposes a `.re` property so the resulting RegExp can be checked and reused.
+
 ## Todo
 
  - <s>put in module</s>
