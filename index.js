@@ -3,7 +3,8 @@ module.exports = function matcher(obj, flags) {
   var props = Object.getOwnPropertyNames(obj);
   var re = new RegExp(props.reduce(function(p, c) {
     if(!isNaN(c)) {
-      throw new TypeError("Object with numeric keys are not supported");
+      throw new TypeError("Objects with numeric keys are not supported."+
+                          "Got object with key: "+c);
     } 
     var val = obj[c];
     if(val.source) val = val.source; // accept RE arguments
