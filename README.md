@@ -1,6 +1,10 @@
 # js-restructure
 JavaScript clone of https://github.com/alexflint/go-restructure
 
+## Installation
+
+    npm install js-restructure
+
 ## Match regular expressions into object fields
 
 Example email matcher
