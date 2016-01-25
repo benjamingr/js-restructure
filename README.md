@@ -77,6 +77,16 @@ For example:
 The second flags parameter is optional and allows setting RE flags like "i" for case insensitivity. 
 The parser also exposes a `.re` property so the resulting RegExp can be checked and reused.
 
+## Browser Support
+
+Any ES5 capable browser is supported meaning IE9+, Firefox, Chrome, Safari and all modern mobile browsers.
+
+## Contribution
+
+Contribution is very welcome and friendliness is a project goal. Feel free to open issues and feature requests. Pull requests are also very welcome.
+
+We indent with two spaces and the code is ES5.
+
 ## Todo
 
  - <s>put in module</s>
