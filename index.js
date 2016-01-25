@@ -4,7 +4,7 @@ module.exports = function matcher(obj, flags) {
   var re = new RegExp(props.reduce(function(p, c) {
     var val = obj[c];
     if(val.source) val = val.source; // accept RE arguments
-    if(c.indexOf("_") === 0) return p + val;
+    if(c[0] === "_") return p + val;
     else return p + "(" + val + ")";
   }, ""), flags || "");
   props = props.filter(function(x) { return !x.startsWith("_"); });
