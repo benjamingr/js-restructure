@@ -2,7 +2,7 @@ module.exports = function matcher(obj, flags) {
   "use strict";
   var props = Object.getOwnPropertyNames(obj);
   var re = new RegExp(props.reduce(function(p, c) {
-    if(isNaN(c)) {
+    if(!isNaN(c)) {
       throw new TypeError("Object with numeric keys are not supported");
     } 
     var val = obj[c];

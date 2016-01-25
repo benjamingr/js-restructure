@@ -5,24 +5,24 @@ describe("Matching", function() {
     var m = matcher({x:"[A-Z]"})("A");
     assert.equal(m.x, "A");
   });
-  it("matches two string", function(){
+  it("matches two string", function() {
     var m = matcher({x:"[A-Z]", y:"[A-Z]"})("AB");
     assert.equal(m.x, "A");
     assert.equal(m.y, "B");
   });
-  it("matches multi character strings", function(){
+  it("matches multi character strings", function() {
     var m = matcher({x:"[A-Z]+"})("AB");
     assert.equal(m.x, "AB");
   });
-  it("matches lazily when it has to", function(){
+  it("matches lazily when it has to", function() {
     var m = matcher({x:"[A-Z]+?", _:"C"})("ABCD");
     assert.equal(m.x, "AB");
   });
-  it("matches numbers", function(){
+  it("matches numbers", function() {
     var m = matcher({x:"\\d+"})("123123");
     assert.equal(m.x, "123123");
   });
-  it("matches emails", function(){
+  it("matches emails", function() {
     var m = matcher({
        _    : "^",
        user : "\\w+",
@@ -33,7 +33,7 @@ describe("Matching", function() {
     assert.equal(m.user, "benji");
     assert.equal(m.host, "nono.com");
   });
-  it("matches primitive http/s urls", function(){
+  it("matches primitive http/s urls", function() {
     var m = matcher({
        protocol    : "http|https",
        _1 : "://",
@@ -47,7 +47,7 @@ describe("Matching", function() {
 
     assert.equal(m.path, "search?foo=bar");
   });
-  it("parses 'primitive' CSV", function(){
+  it("parses 'primitive' CSV", function() {
     var p = matcher({
        first   : "\\w+?",
        _1      : ",",
@@ -60,6 +60,12 @@ describe("Matching", function() {
     assert.equal(m.first, "Benjamin");
     assert.equal(m.last, "Gruenbaum");
     assert.equal(m.age, "27");
+  });
+  it("works with dynamic objects", function() { 
+    var o = {};
+    o["A"] = "A";
+    var p = matcher(o)("A").A;
+    assert.equal(p, "A");
   });
   it("parses HTML", function(){
     var he = matcher({
@@ -82,7 +88,7 @@ describe("Matching", function() {
     assert.equal(m.x, "a");
     assert.equal(m.y, "AAAAA");
   });
-  it("matches emails with RE syntax", function(){
+  it("matches emails with RE syntax", function() {
     var m = matcher({
        _    : /^/,
        user : /\w+/,
@@ -93,17 +99,36 @@ describe("Matching", function() {
     assert.equal(m.user, "benji");
     assert.equal(m.host, "nono.com");
   });
-  it("accepts flags as a second parameter", function(){
+  it("accepts flags as a second parameter", function() {
     var m = matcher({
      x: "a+",
     }, "i")("aAAAAA");
     assert.equal(m.x, "aAAAAA");
   });
-  it("behaves like native RE on invalid flags", function(){
+  it("behaves like native RE on invalid flags", function() {
     assert.throws(function() { 
       var m = matcher({
         x: "a+",
       }, "13qwshfd")("aAAAAA");
-    );
+    });
+  });
+  it("throws on objects with numeric keys (inconsistent iteration order)",
+    function(){
+      assert.throws(function() {
+        var m = matcher([1,2,3]);
+      });
+  });
+  it("works with a large number of properties", function() {
+    var o = {};
+    var str = "";
+    for(var i = 0; i < 100; i++) {
+        o["x_" + i] = "A";
+        str += "A"
+    }
+    var parser = matcher(o);
+    var o2 = parser(str);
+    assert.equal(o2.x_50, "A");
+    assert.equal(o2.x_99, "A");
+    assert.equal(o2.x_0, "A");
   });
 });
