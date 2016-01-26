@@ -10,6 +10,10 @@ describe("Matching", function() {
     assert.equal(m.x, "A");
     assert.equal(m.y, "B");
   });
+  it("returns null on no match", function() {
+    var m = matcher({x:"B"})("A");
+    assert.equal(m, null);
+  });
   it("matches multi character strings", function() {
     var m = matcher({x:"[A-Z]+"})("AB");
     assert.equal(m.x, "AB");
@@ -21,6 +25,11 @@ describe("Matching", function() {
   it("ignores patterns containing _", function() {
     var m = matcher({_1:"[A-Z]+"})("AB");
     assert.equal(m._1, undefined);
+  });
+  it("ignores multiple patterns containing _", function() {
+    var m = matcher({_1:"[A-Z]+", _2:"[A-Z]+"})("AB");
+    assert.equal(m._1, undefined);
+    assert.equal(m._2, undefined);
   });
   it("matches lazily when it has to", function() {
     var m = matcher({x:"[A-Z]+?", _:"C"})("ABCD");
@@ -186,5 +195,11 @@ describe("the parser nesting abilities", function() {
     assert.equal(p.x.x, "A");
     assert.equal(p.y, "a");
   });
-
+});
+describe("properties of the return value", function() {
+  it("does not return extra properties", function() {
+    assert.equal(Object.keys({}).length, 0); // nothing crazy
+    var m = matcher({x:"A",y:"B"})("AB");
+    assert.equal(Object.keys(m).length, 2); // nothing crazy
+  });
 });

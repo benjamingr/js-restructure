@@ -20,7 +20,7 @@ function matcher(obj, flags) {
       var o = {};
       var res = re.exec(str);
       if(res === null) return null;
-      for(var i = 0; i < res.length; i++) {
+      for(var i = 0; i < props.length; i++) {
         if(parserArgs[i]) { // got a parser
           o[props[i]] = parserArgs[i](res[i + 1]); // invoke the parser
         } else {
