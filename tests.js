@@ -77,8 +77,9 @@ describe("Matching", function() {
     assert.equal(comes.url, "http://www.google.com");
   });
   it("accepts REs ", function(){
-    var m = matcher({ x: /a/})("a");
-    assert.equal(m.x, "a");
+    var m = matcher({ x: /a/});
+    var p = m("a");
+    assert.equal(p.x, "a");
   });
   it("accepts multiple REs ", function(){
     var m = matcher({
@@ -130,5 +131,43 @@ describe("Matching", function() {
     assert.equal(o2.x_50, "A");
     assert.equal(o2.x_99, "A");
     assert.equal(o2.x_0, "A");
+  });
+
+});
+
+describe("the parser", function() {
+  it("should accept nested objects", function() {
+    var p = matcher({x: {x:"A"}})("A");
+    assert.equal(p.x.x, "A");
+  });
+  it("should accept multiple nested objects", function() {
+    var p = matcher({x: {x:"A"}, y: {y: "B"}})("AB");
+    assert.equal(p.x.x, "A");
+    assert.equal(p.y.y, "B");
+  });
+  it("should accept deep nested objects", function() {
+    var p = matcher({x: {x:"A", y: "B"}})("AB");
+    assert.equal(p.x.x, "A");
+    assert.equal(p.x.y, "B");
+  });
+  it("should accept nested matchers", function() {
+    var m1 = matcher({x: "A"});
+    var m2 = matcher({x: m1 });
+    var p = m2("A");
+    assert.equal(p.x.x, "A");
+  });
+  it("should accept the same matcher twice", function() {
+    var m1 = matcher({x: "A"});
+    var m2 = matcher({x: m1, y:m1 });
+    var p = m2("AA");
+    assert.equal(p.x.x, "A");
+    assert.equal(p.y.x, "A");
+  });
+  it("should accept the same matcher twice", function() {
+    var m1 = matcher({x: "A"});
+    var m2 = matcher({x: m1, y:m1 });
+    var p = m2("AA");
+    assert.equal(p.x.x, "A");
+    assert.equal(p.y.x, "A");
   });
 });
