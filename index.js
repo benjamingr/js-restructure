@@ -14,14 +14,11 @@ function matcher(obj, flags) {
     else return p + "(" + val + ")";
   }, ""), flags || "");
   
-  var _nonCapturingRe = props.reduce( function(prev, cur) {
-    return prev + obj[cur];
-  }, "");
-
+  var _nonCapturingRe = props.map(function(p) { return obj[p]; }).join("");
   props = props.filter(function(x) { return x[0] !== "_"; });
-  var parser = function(pattern) {
+  var parser = function(str) {
       var o = {};
-      var res = re.exec(pattern);
+      var res = re.exec(str);
       if(res === null) return null;
       for(var i = 0; i < res.length; i++) {
         if(parserArgs[i]) { // got a parser
@@ -35,7 +32,7 @@ function matcher(obj, flags) {
   parser._nonCapturingRe = _nonCapturingRe; // expose raw RE for nesting
   parser.re = re; // expose regexp
   return parser;
-};
+}
 
 function getVal(obj, prop, extraParsers) {
   var val = obj[prop];

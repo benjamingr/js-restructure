@@ -18,6 +18,10 @@ describe("Matching", function() {
     var m = matcher({_:"[A-Z]+"})("AB");
     assert.equal(m._, undefined);
   });
+  it("ignores patterns containing _", function() {
+    var m = matcher({_1:"[A-Z]+"})("AB");
+    assert.equal(m._1, undefined);
+  });
   it("matches lazily when it has to", function() {
     var m = matcher({x:"[A-Z]+?", _:"C"})("ABCD");
     assert.equal(m.x, "AB");
