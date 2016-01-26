@@ -64,6 +64,11 @@ For example:
 
 **Note:** The parser ignores properties that start with `_`, if you have properties that you do not want to capture but need to specify parts of the RE, start them with `_`. 
 
+You can nest objects and parsers inside a parser:
+
+    var parser2 = matcher({x : parser}); // can nest parsers to create nested results
+    var parser3 = matcher({x : {x: 3}}); // will create a nested object when parsing
+
 A parser is itself a function that can be passed a string, it returns an object of the type passed when creating the parser or null if the parsing failed:
 
     Parser:: (string[, flags]) => T?
@@ -93,8 +98,8 @@ We indent with two spaces and the code is ES5.
  - <s>npm package</s>
  - <s>cdn etc.</s>
  - <s>tests</s>
- - demos
- - nested match
+ - <s>demos</s>
+ - <s>nested match</s>
  - measure performance
  - sugar
 
