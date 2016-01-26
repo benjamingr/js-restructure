@@ -14,6 +14,10 @@ describe("Matching", function() {
     var m = matcher({x:"[A-Z]+"})("AB");
     assert.equal(m.x, "AB");
   });
+  it("ignores patterns with _", function() {
+    var m = matcher({_:"[A-Z]+"})("AB");
+    assert.equal(m._, undefined);
+  });
   it("matches lazily when it has to", function() {
     var m = matcher({x:"[A-Z]+?", _:"C"})("ABCD");
     assert.equal(m.x, "AB");
@@ -135,13 +139,14 @@ describe("Matching", function() {
 
 });
 
-describe("the parser", function() {
+describe("the parser nesting abilities", function() {
   it("should accept nested objects", function() {
-    var p = matcher({x: {x:"A"}})("A");
+    var m = matcher({x: {x: "A"}});
+    var p = m("A");
     assert.equal(p.x.x, "A");
   });
   it("should accept multiple nested objects", function() {
-    var p = matcher({x: {x:"A"}, y: {y: "B"}})("AB");
+    var p = matcher({x: {x: "A"}, y: {y: "B"}})("AB");
     assert.equal(p.x.x, "A");
     assert.equal(p.y.y, "B");
   });
@@ -158,16 +163,24 @@ describe("the parser", function() {
   });
   it("should accept the same matcher twice", function() {
     var m1 = matcher({x: "A"});
-    var m2 = matcher({x: m1, y:m1 });
+    var m2 = matcher({x: m1, y: m1 });
     var p = m2("AA");
     assert.equal(p.x.x, "A");
     assert.equal(p.y.x, "A");
   });
   it("should accept the same matcher twice", function() {
     var m1 = matcher({x: "A"});
-    var m2 = matcher({x: m1, y:m1 });
+    var m2 = matcher({x: m1, y: m1 });
     var p = m2("AA");
     assert.equal(p.x.x, "A");
     assert.equal(p.y.x, "A");
   });
+  it("should be able to mix REs with objects", function() {
+    var m1 = matcher({x: "A"});
+    var m2 = matcher({x: m1, y: /a/ });
+    var p = m2("Aa");
+    assert.equal(p.x.x, "A");
+    assert.equal(p.y, "a");
+  });
+
 });

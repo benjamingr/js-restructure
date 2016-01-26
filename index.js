@@ -1,28 +1,15 @@
-module.exports = function matcher(obj, flags) {
+module.exports = matcher;
+
+function matcher(obj, flags) {
   "use strict";
   var props = Object.getOwnPropertyNames(obj);
   var parserArgs = [];
   var re = new RegExp(props.reduce(function(p, c) {
     if(!isNaN(c)) {
-      throw new TypeError("Objects with numeric keys are not supported."+
-                          "Got object with key: "+c);
-    } 
-    var val = obj[c];
-
-    // convert objects that are not matchers or REs to nested parsers
-    if (Object(val) === val && !val.re && !val.source) { 
-      val = matcher(val);
+      throw new TypeError("Objects with numeric keys are not supported." +
+                          "Got object with key: " + c + " for object: " + obj);
     }
-    if(val.re) {
-      // accept parser arguments,
-      parserArgs.push(val); // add the parser
-      val = val._nonCapturingRe; //  don't capture for re arguments. 
-    } else if (val.source) {
-
-      val = val.source; // accept RE arguments
-    } else {
-      parserArgs.push(null);
-    }
+    var val = getVal(obj, c, parserArgs);
     if(c[0] === "_") return p + val;
     else return p + "(" + val + ")";
   }, ""), flags || "");
@@ -49,3 +36,25 @@ module.exports = function matcher(obj, flags) {
   parser.re = re; // expose regexp
   return parser;
 };
+
+function getVal(obj, prop, extraParsers) {
+  var val = obj[prop];
+  var isParser = Boolean(val.re);
+  var isRegExp = Boolean(val.source);
+  var isObject = Object(val) === val;
+  // convert objects that are not matchers or RegExps to nested parsers
+  if (isObject && !isParser && !isRegExp) {
+    val = matcher(val);
+  }
+  isParser = Boolean(val.re); // update in case we now converted it to a parser
+  if (isParser) { // accept parsers as arguments
+    extraParsers.push(val); // note this is a parser
+    val = val._nonCapturingRe; // don't capture for parser arguments
+  } else if (isRegExp) {
+    extraParsers.push(null); // not a parser
+    val = val.source; 
+  } else {
+    extraParsers.push(null); // not a parser
+  }
+  return val;
+}
