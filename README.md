@@ -4,10 +4,10 @@ Based on https://github.com/alexflint/go-restructure
 
 This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields.
 
- - [Motivation](https://github.com/benjamingr/js-restructure#motivation).
- - [API Docs](https://github.com/benjamingr/js-restructure/blob/master/API.md).
- - [Installation](https://github.com/benjamingr/js-restructure#installation).
- - [Contribution](https://github.com/benjamingr/js-restructure#contribution).
+ - [Motivation](https://github.com/benjamingr/js-restructure#motivation)
+ - [API Docs](https://github.com/benjamingr/js-restructure/blob/master/API.md)
+ - [Installation](https://github.com/benjamingr/js-restructure#installation)
+ - [Contribution](https://github.com/benjamingr/js-restructure#contribution)
 
 Here is a very simple email address parser:
 
@@ -51,7 +51,7 @@ Matching nested RegExps is hard to read. The goal of this package is to allow us
 
     npm install js-restructure
 
-Or in the browser
+Or in the browser:
 
     <script src='https://wzrd.in/standalone/js-restructure@latest'></script>
 
@@ -79,4 +79,3 @@ We indent with two spaces and the code is ES5.
  - <s>nested match</s>
  - measure performance
  - sugar
-
