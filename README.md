@@ -40,12 +40,12 @@ m.host; // www.google.com
 m.path; // search?foo=bar
 ```
 
-Note: In "real code" use the built in parsing capabilities of browsers/node to parse real URLs. 
+Note: In "real code" use the built-in parsing capabilities of browsers/node to parse real URLs. 
 
 
 ## Motivation
 
-Matching nested RegExps is hard to read. The goal of this package is to allow users to match common patterns without having to parse the capturing groups of complex regular expressions and put those in object fields. This "shims" the lack of lack of named capturing groups in JavaScript. 
+Matching nested RegExps is hard to read. The goal of this package is to allow users to match common patterns without having to parse the capturing groups of complex regular expressions and put those in object fields. This "shims" the lack of named capturing groups in JavaScript. 
 
 ## Installation
 
