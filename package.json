@@ -1,7 +1,7 @@
 {
   "name": "js-restructure",
   "version": "1.1.2",
-  "description": "This package provides a nifty way to match against regular expressions\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bconstruct and match against regular expressions.",
+  "description": "This package provides a nifty way to match against regular expressions. Construct objects and match against regular expressions.",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests"
@@ -12,6 +12,8 @@
   },
   "keywords": [
     "regexp",
+    "capturing group",
+    "named capturing group",
     "re",
     "match"
   ],
