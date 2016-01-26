@@ -4,6 +4,11 @@ Based on https://github.com/alexflint/go-restructure
 
 This package allows you to express regular expressions by defining an object, and then capture matched sub-expressions into object's fields.
 
+ - [Motivation](https://github.com/benjamingr/js-restructure#motivation).
+ - [API Docs](https://github.com/benjamingr/js-restructure/blob/master/API.md).
+ - [Installation](https://github.com/benjamingr/js-restructure#installation).
+ - [Contribution](https://github.com/benjamingr/js-restructure#contribution).
+
 Here is a very simple email address parser:
 
 ```js
@@ -38,6 +43,10 @@ m.path; // search?foo=bar
 Note: In "real code" use the built in parsing capabilities of browsers/node to parse real URLs. 
 
 
+## Motivation
+
+Matching nested RegExps is hard to read. The goal of this package is to allow users to match common patterns without having to parse the capturing groups of complex regular expressions and put those in object fields. This "shims" the lack of lack of named capturing groups in JavaScript. 
+
 ## Installation
 
     npm install js-restructure
@@ -49,38 +58,6 @@ Or in the browser
 Usage in script tag:
     
     var matcher = window.jsRestructure(...);
-
-## API
-
-The basic fundamental unit of js-restructure is a parser. A parser is created by passing an object to the matcher function (the one you `require`, in the browser this is `window.jsRestructure`).
-
-Creating a parser:
-
-    matcher(T object) -> Parser
-
-For example:
-
-    var parser = matcher({x : A });
-
-**Note:** The parser ignores properties that start with `_`, if you have properties that you do not want to capture but need to specify parts of the RE, start them with `_`. 
-
-You can nest objects and parsers inside a parser:
-
-    var parser2 = matcher({x : parser}); // can nest parsers to create nested results
-    var parser3 = matcher({x : {x: 3}}); // will create a nested object when parsing
-
-A parser is itself a function that can be passed a string, it returns an object of the type passed when creating the parser or null if the parsing failed:
-
-    Parser:: (string[, flags]) => T?
-
-For example:
-
-    var parser = matcher({x : A });
-    parser("A").x; // A
-    parser("B"); // null, no match
-
-The second flags parameter is optional and allows setting RE flags like "i" for case insensitivity. 
-The parser also exposes a `.re` property so the resulting RegExp can be checked and reused.
 
 ## Browser Support
 
