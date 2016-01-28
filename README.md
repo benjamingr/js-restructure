@@ -68,14 +68,3 @@ Any ES5 capable browser is supported meaning IE9+, Firefox, Chrome, Safari and a
 Contribution is very welcome and friendliness is a project goal. Feel free to open issues and feature requests. Pull requests are also very welcome.
 
 We indent with two spaces and the code is ES5.
-
-## Todo
-
- - <s>put in module</s>
- - <s>npm package</s>
- - <s>cdn etc.</s>
- - <s>tests</s>
- - <s>demos</s>
- - <s>nested match</s>
- - measure performance
- - sugar
