@@ -35,6 +35,7 @@ function matcher(obj, flags) {
 }
 
 function getVal(obj, prop, extraParsers) {
+  "use strict";
   var val = obj[prop];
   var isParser = Boolean(val.re);
   var isRegExp = Boolean(val.source);
